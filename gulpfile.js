@@ -97,6 +97,10 @@ const js = () => {
     // svg support in all browsers
     "node_modules/svg4everybody/dist/svg4everybody.min.js", // no jQuery needed
 
+
+    "node_modules/gsap/dist/gsap.min.js",
+    "node_modules/gsap/dist/CSSRulePlugin.min.js"
+
     // modal
     // "node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js",
 

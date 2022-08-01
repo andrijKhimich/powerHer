@@ -48,6 +48,7 @@
   width: 250px;
   text-align: center;
 
+  // display: none;
   @include d(992) {
     position: fixed;
     top: 0;

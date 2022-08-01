@@ -40,6 +40,7 @@
     "webp-converter": "^2.2.3"
   },
   "dependencies": {
+    "gsap": "^3.10.4",
     "jquery": "^3.6.0",
     "jquery-nice-select": "^1.1.0",
     "svg4everybody": "^2.1.9",

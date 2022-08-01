@@ -24,7 +24,7 @@
     z-index: -1;
     max-height: 800px;
     max-width: 800px;
-
+    opacity: 1;
     @include d(1440) {
       height: 48vw;
     }
@@ -108,7 +108,12 @@
 
     &__img {
       width: 192px;
-
+      height: 130px;
+      overflow: hidden;
+      picture, img {
+        height: 100%;
+        object-fit: cover;
+      }
       @include d(359) {
         width: 180px;
       }
@@ -154,7 +159,7 @@
     max-width: 660px;
     top: 112px;
     right: 0;
-
+    overflow: hidden;
     @include d(1340) {
       right: -15px;
     }
