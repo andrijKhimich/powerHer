@@ -3,7 +3,8 @@
   padding-top: 64px;
   background-color: $black;
   color: $white;
-
+  overflow: hidden;
+  z-index: 20;
   @include d(1440) {
     padding-top: 32px;
   }
