@@ -5,7 +5,9 @@
   color: $white;
   overflow: hidden;
   z-index: 20;
-  @include d(1440) {
+  // flex: 0 0 100%;
+  width: 100%;
+  @include d(1024) {
     padding-top: 32px;
   }
 
@@ -16,12 +18,12 @@
     padding: 56px 0;
     border-top: 1px solid $beigeLight;
 
-    @include d(1440) {
+    @include d(1024) {
       padding: 30px;
     }
 
     @include d(768) {
-      padding: 24px;
+      padding: 24px 0;
       flex-direction: column;
       justify-content: center;
     }

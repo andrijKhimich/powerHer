@@ -13,6 +13,10 @@
 .hero {
   padding: 112px 0 90px 0;
 
+  @include d(1024) {
+    padding: 100px 0 90px 0;
+  }
+
   &::before {
     content: "";
     width: 41vw;
@@ -180,7 +184,13 @@
 }
 
 .testimonials {
-  // padding: 10px 0 160px 0;
+  padding: 220px 0 0 0;
+  @include d(1280) {
+    padding: 100px 0 0 0;
+  }
+  // @include d(1024) {
+  //   padding: 0 0 100px 0;
+  // }
 
   &__title {
     display: none;
@@ -211,7 +221,8 @@
     justify-content: space-between;
     position: relative;
 
-    @include d(768) {
+    // transition: 1s;
+    @include d(1440) {
       padding: 30px 0;
     }
 
@@ -319,12 +330,23 @@
 .gift {
   background-color: $beigeLight;
   position: relative;
-  height: 50vh;
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+
+  @include d(1024) {
+    height: auto;
+  }
+
   &__content {
-    padding: 115px 30px 120px 108px;
+    padding: 150px 30px 80px 108px;
     max-width: 57%;
     margin-right: 0;
     margin-left: auto;
+
+    @include d(1440) {
+      // padding: 30px 30px 30px 100px;
+    }
 
     @include d(992) {
       padding: 115px 0px 120px 30px;
@@ -342,21 +364,43 @@
 
   &__img {
     position: absolute;
-    left: 0;
-    top: 0;
-    top: 50%;
+    // left: 0;
+    // top: 0;
+    // top: 50%;
     max-width: 44%;
-    height: 50vh;
+    top: 0;
+    height: 100%;
     // top: 15%;
-    transform: translate(0, -50%);
+    // transform: translate(0, -50%);
     z-index: 12;
+
     // transition: 1s;
     // height: 314px;
     // z-index: 1;
+    // transition: all 1s ease;
+
+    // &.active {
+    //   position: absolute;
+    //   // transform: translate(0, 100%);
+    //   top: 100%;
+    //   width: 100vw;
+    //   height: 100vh;
+    //   max-width: 100%;
+    // }
+
+    // @include d(1024) {
+    //   height: 310px;
+    // }
+
+    // @include d(992) {
+    //   height: 505px;
+    // }
 
     @include d(768) {
       position: static;
       max-width: 100%;
+      flex: 0 0 100%;
+      transform: translate(0, 0);
     }
 
     picture {
@@ -380,9 +424,16 @@
 }
 
 .faq {
-  overflow: auto;
-  padding: 100px 0;
-  height: 100vh;
+  padding: 220px 0;
+
+  @include d(1280) {
+    padding: 110px 0;
+  }
+
+  @include d(768) {
+    padding: 40px 0;
+  }
+
   &__content {
     margin-right: 0;
     margin-left: auto;
@@ -410,10 +461,21 @@
 .accordion {
   margin-right: 48px;
   max-width: 70%;
-
+  width: 100%;
   @include d(768) {
     max-width: 100%;
     margin-right: 0;
+  }
+}
+
+.accordion__item {
+  &.active {
+    .accordion__btn {
+      .svg-arrow {
+        transform: rotate(90deg);
+      }
+    }
+
   }
 }
 
@@ -429,7 +491,7 @@
   font-size: 22px;
   line-height: 150%;
   font-family: $fontTitle;
-
+  color: $black;
   @include d(992) {
     padding: 30px 30px 30px 0;
   }
@@ -437,17 +499,6 @@
   &:first-child {
     border-top: 1px solid $beige;
   }
-
-  // &::before {
-  //   content: "";
-  //   width: 100%;
-  //   height: 1px;
-  //   background-color: $beige;
-  //   position: absolute;
-  //   bottom: 0;
-  //   left: 0;
-  //   transition: opacity $hover-duration $timing;
-  // }
 
   .svg-arrow {
     position: absolute;
@@ -457,16 +508,7 @@
     fill: $primary;
     left: auto;
     transition: transform $hover-duration $timing;
-  }
-
-  &.active {
-    &::before {
-      opacity: 0;
-    }
-
-    .svg-arrow {
-      transform: rotate(90deg);
-    }
+    pointer-events: none;
   }
 }
 
@@ -495,17 +537,6 @@
     font-weight: 700;
   }
 
-
-  // &::before {
-  //   content: "";
-  //   width: 100%;
-  //   height: 1px;
-  //   background-color: $beige;
-  //   position: absolute;
-  //   bottom: 0;
-  //   left: 0;
-  // }
-
   ul {
     margin: 5px 0;
 
@@ -530,19 +561,13 @@
 }
 
 .partners {
-  // padding: 180px 0;
   background-color: $beigeLight;
-
-  // @include d(1280) {
-  //   padding: 140px 0;
-  // }
-
-  // @include d(768) {
-  //   padding: 72px 0;
-  // }
-
+  padding: 180px 0;
+  @include d(1024) {
+    padding: 100px 0;
+  }
   &__content {
-    // max-width: 66%;
+    max-width: 66%;
     margin-left: auto;
     margin-right: 0;
     width: 864px;
@@ -553,6 +578,7 @@
 
     @include d(992) {
       width: 100%;
+      max-width: 100%;
     }
   }
 
@@ -636,11 +662,6 @@
       background-color: $white;
     }
 
-    // @include d(768) {
-    //   &:nth-child(odd) {
-    //     background-color: $white;
-    //   }
-    // }
     img,
     picture {
       width: auto;
@@ -654,16 +675,17 @@
 }
 
 .about {
-  padding: 100px 0;
-  overflow: auto;
-  height: 100vh;
-  // @include d(992) {
-  //   padding: 140px 0;
-  // }
 
-  // @include d(768) {
-  //   padding: 110px 0;
-  // }
+  padding: 120px 0;
+
+  @include d(1024) {
+    height: auto;
+    padding: 100px 0;
+  }
+
+  @include d(768) {
+    padding: 80px 0;
+  }
 
   &__content {
     max-width: 64%;
@@ -777,15 +799,24 @@
 }
 
 .cta {
-  // height: 50vh;
   &__img {
     position: absolute;
     left: 0;
-    // top: -100%;
     max-width: 100%;
     height: 100vh;
     z-index: 12;
-    bottom: 200%;
+    bottom: 100%;
+    width: 100%;
+    @include d(992) {
+      position: absolute;
+      height: 100%;
+      // height: 310px;
+      // bottom: 126px;
+      bottom: 0;
+      left: 0;
+      max-width: 44%;
+    }
+
     @include d(768) {
       position: static;
       max-width: 100%;
@@ -809,15 +840,30 @@
       }
     }
   }
+
+  &__content {
+    // height: 50vh;
+    margin-bottom: 0;
+    margin-top: auto;
+    position: relative;
+
+    @include d(1024) {
+      height: auto;
+    }
+
+    &::before {
+      content: "";
+      width: 300vw;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: -100vw;
+      background-color: $beigeLight;
+      z-index: -1;
+    }
+  }
 }
-.section__footer {
-  align-items: flex-end;
-  height: 50vh;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
+
 .imprint {
   padding: 194px 0 110px;
 
@@ -961,5 +1007,14 @@ address {
         text-decoration: underline;
       }
     }
+  }
+}
+
+
+
+.img-cover {
+  height: 100vh;
+  @include d(992) {
+    display: none;
   }
 }
