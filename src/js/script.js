@@ -62,9 +62,99 @@ gsap.from(CSSRulePlugin.getRule(".hero:before"), { duration: 1, x: '20px', opaci
 //   });
 // })
 
+function goToSection(i, anim) {
+  gsap.set("body", { overflow: "hidden" });
+
+  gsap.to("body", {
+    scrollTo: { y: i * innerHeight, autoKill: false },
+    duration: 1,
+    overwrite: true,
+    onComplete: () => gsap.set("body", { overflow: "auto" })
+  });
+}
+
+
+// const site = document.querySelector('body');
+
+// const disableScroll = () => {
+//   site.style.overflow = 'hidden';
+//   setTimeout(function () {
+//     site.style.overflow = 'auto';
+//   }, 1000)
+// }
+// const triggers = [];
+
+// const goToSection = (i, anim) => {
+//   if (triggers[i]) { // only if the trigger exists
+//     gsap.to(window, {
+//       scrollTo: { y: triggers[i].trigger, autoKill: false },
+//       overwrite: true,
+//       duration: 1
+//     });
+//     anim && anim.restart();
+//   }
+// }
+
+// gsap.utils.toArray('.panel').forEach((panel, i) => {
+//   const trigger = ScrollTrigger.create({
+//     trigger: panel,
+//     start: "top bottom-=1",
+//     end: "bottom top+=2",
+//     markers: true,
+//     onEnter: () => goToSection(i),
+//     onEnterBack: () => goToSection(i)
+//   });
+//   triggers.push(trigger);
+// });
+
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+// var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+
+// function preventDefault(e) {
+//   e.preventDefault();
+// }
+
+// function preventDefaultForScrollKeys(e) {
+//   if (keys[e.keyCode]) {
+//     preventDefault(e);
+//     return false;
+//   }
+// }
+
+// modern Chrome requires { passive: false } when adding event
+// var supportsPassive = false;
+// try {
+//   window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+//     get: function () { supportsPassive = true; }
+//   }));
+// } catch (e) { }
+
+// var wheelOpt = supportsPassive ? { passive: false } : false;
+// var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+// // call this to Disable
+// function disableScroll() {
+//   console.log('disabled');
+//   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+//   window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+//   window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+//   window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+// }
+
+// // call this to Enable
+// function enableScroll() {
+//   console.log('enable');
+//   window.removeEventListener('DOMMouseScroll', preventDefault, false);
+//   window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+//   window.removeEventListener('touchmove', preventDefault, wheelOpt);
+//   window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+// }
+
 
 ScrollTrigger.matchMedia({
   '(min-width: 993px)': function () {
+    
     gsap.to('.nav-wrapper', { opacity: 0, pointerEvents: 'none' });
 
 
@@ -74,29 +164,45 @@ ScrollTrigger.matchMedia({
         trigger: panel,
         markers: false,
         start: 'bottom 50%',
-        // end: 'top top',
 
-        // onToggle: self => console.log("toggled. active?", self.isActive),
         onEnter: () => {
-          // goToSection(i);
-          // console.log(i);
-
           if (i === 2) {
-            // goToSection(section);
+          console.log(i);
+
+            // disableScroll();
+            // gsap.to("body", { overflow: "hidden" })
+            // .to(".someSelector", 1, { rotate: 360, delay: 0.5 }
             gsap.to('.js-img-1', { duration: 1, maxWidth: '99.5vw', height: '100vh', width: '99.5vw', top: '100%' });
-            gsap.to(window, { duration: 1, scrollTo: "#section4" });
+            // gsap.to(window, { duration: 1, scrollTo: "#section4" });
+            gsap.to(window, {
+              scrollTo: { y: "#section4", autoKill: false },
+              overwrite: true,
+              duration: 1
+            });
             setTimeout(function () {
               gsap.to(window, { duration: 1, scrollTo: "#section5" });
             }, 1500);
+            // gsap.to("body", { overflow: "" });
 
+            // setTimeout(function () {
+            //   enableScroll();
+            // }, 2500);
           }
           if (i === 6) {
+            // disableScroll();
             gsap.to('.js-img-2', { duration: 1, maxWidth: '44%', height: '100%', width: '44%', bottom: '0', delay: 1.5 });
-            gsap.to(window, { duration: 1, scrollTo: "#section8" });
+            // gsap.to(window, { duration: 1, scrollTo: "#section8" });
+            gsap.to(window, {
+              scrollTo: { y: "#section8", autoKill: false },
+              overwrite: true,
+              duration: 1
+            });
             setTimeout(function () {
               gsap.to(window, { duration: 1, scrollTo: "#section9" });
             }, 1500);
-
+            // setTimeout(function () {
+            //   enableScroll();
+            // }, 2500);
           }
         }
       });
@@ -111,25 +217,46 @@ ScrollTrigger.matchMedia({
         markers: false,
 
         onEnterBack: () => {
-          // goToSection(i)
           console.log(i);
 
           if (i === 4) {
-            // goToSection(section);
+            // disableScroll();
             gsap.to('.js-img-1', { duration: 1, maxWidth: '44%', height: '100%', top: '0', delay: 1 });
-            gsap.to(window, { duration: 1, scrollTo: "#section4" });
+            gsap.to(window, {
+              scrollTo: { y: "#section4", autoKill: false },
+              overwrite: true,
+              duration: 1
+            });
             setTimeout(function () {
-              gsap.to(window, { duration: 1, scrollTo: "#section3" });
+              gsap.to(window, {
+                scrollTo: { y: "#section3", autoKill: false },
+                overwrite: true,
+                duration: 1
+              });
             }, 1000);
+            // setTimeout(function () {
+            //   enableScroll();
+            // }, 2500);
           }
 
           if (i === 8) {
-            // goToSection(section);
+            // disableScroll();
             gsap.to('.js-img-2', { duration: 1, maxWidth: '100%', height: '100vh', width: '100%', bottom: '100%' });
-            gsap.to(window, { duration: 1, scrollTo: "#section8" });
+            gsap.to(window, {
+              scrollTo: { y: "#section8", autoKill: false },
+              overwrite: true,
+              duration: 1
+            });
             setTimeout(function () {
-              gsap.to(window, { duration: 1, scrollTo: "#section7" });
+              gsap.to(window, {
+                scrollTo: { y: "#section7", autoKill: false },
+                overwrite: true,
+                duration: 1
+              });
             }, 1500);
+            // setTimeout(function () {
+            //   enableScroll();
+            // }, 2500);
           }
         }
       });
@@ -145,7 +272,6 @@ ScrollTrigger.matchMedia({
         // onToggle: self => console.log("toggled. active?", self.isActive),
         onEnter: () => {
           // goToSection(i);
-          console.log(i);
           if (i >= 1 && i < 2) {
             gsap.to('.nav-wrapper', { duration: .4, opacity: 1, pointerEvents: 'initial' });
           } else if (i >= 4 && i <= 6) {
@@ -389,9 +515,9 @@ $(document).on('click', '.nav-list a[href^="#"]', function (event) {
   event.preventDefault();
   closeMenu();
   $('html, body').animate({
-      scrollTop: $($.attr(this, 'href')).offset().top
-    
-  }, 1000);
+    scrollTop: $($.attr(this, 'href')).offset().top
+
+  }, 2000);
 });
 
 
@@ -439,4 +565,5 @@ document.addEventListener('DOMContentLoaded', function () {
       makeActive(current);
     }
   });
+
 }, false);

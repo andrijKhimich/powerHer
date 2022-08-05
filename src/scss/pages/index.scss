@@ -185,9 +185,11 @@
 
 .testimonials {
   padding: 220px 0 0 0;
+
   @include d(1280) {
     padding: 100px 0 0 0;
   }
+
   // @include d(1024) {
   //   padding: 0 0 100px 0;
   // }
@@ -331,7 +333,6 @@
   background-color: $beigeLight;
   position: relative;
   display: flex;
-  // align-items: center;
   justify-content: space-between;
 
   @include d(1024) {
@@ -364,37 +365,10 @@
 
   &__img {
     position: absolute;
-    // left: 0;
-    // top: 0;
-    // top: 50%;
     max-width: 44%;
     top: 0;
     height: 100%;
-    // top: 15%;
-    // transform: translate(0, -50%);
     z-index: 12;
-
-    // transition: 1s;
-    // height: 314px;
-    // z-index: 1;
-    // transition: all 1s ease;
-
-    // &.active {
-    //   position: absolute;
-    //   // transform: translate(0, 100%);
-    //   top: 100%;
-    //   width: 100vw;
-    //   height: 100vh;
-    //   max-width: 100%;
-    // }
-
-    // @include d(1024) {
-    //   height: 310px;
-    // }
-
-    // @include d(992) {
-    //   height: 505px;
-    // }
 
     @include d(768) {
       position: static;
@@ -462,6 +436,7 @@
   margin-right: 48px;
   max-width: 70%;
   width: 100%;
+
   @include d(768) {
     max-width: 100%;
     margin-right: 0;
@@ -492,6 +467,7 @@
   line-height: 150%;
   font-family: $fontTitle;
   color: $black;
+
   @include d(992) {
     padding: 30px 30px 30px 0;
   }
@@ -563,9 +539,11 @@
 .partners {
   background-color: $beigeLight;
   padding: 180px 0;
+
   @include d(1024) {
     padding: 100px 0;
   }
+
   &__content {
     max-width: 66%;
     margin-left: auto;
@@ -807,6 +785,7 @@
     z-index: 12;
     bottom: 100%;
     width: 100%;
+
     @include d(992) {
       position: absolute;
       height: 100%;
@@ -1014,6 +993,7 @@ address {
 
 .img-cover {
   height: 100vh;
+
   @include d(992) {
     display: none;
   }
