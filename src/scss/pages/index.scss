@@ -187,7 +187,7 @@
   padding: 220px 0 0 0;
 
   @include d(1280) {
-    padding: 100px 0 0 0;
+    padding: 100px 0;
   }
 
   // @include d(1024) {
@@ -335,8 +335,8 @@
   display: flex;
   justify-content: space-between;
 
-  @include d(1024) {
-    height: auto;
+  &__wrapper {
+    position: relative;
   }
 
   &__content {
@@ -346,7 +346,7 @@
     margin-left: auto;
 
     @include d(1440) {
-      // padding: 30px 30px 30px 100px;
+      padding: 30px 30px 30px 100px;
     }
 
     @include d(992) {
@@ -370,6 +370,8 @@
     height: 100%;
     z-index: 12;
 
+    // top: 50%;
+    // transform: translateX(-50%);
     @include d(768) {
       position: static;
       max-width: 100%;
@@ -400,6 +402,10 @@
 .faq {
   padding: 220px 0;
 
+  // margin-top: 50vh;
+  // background-color: $white;
+  // z-index: 100;
+  // margin-top: 50vh;
   @include d(1280) {
     padding: 110px 0;
   }
@@ -850,27 +856,6 @@
     padding: 100px 0;
   }
 
-  ul {
-    li {
-      padding-left: 20px;
-      position: relative;
-      font-weight: 500;
-      line-height: 1.7em;
-      font-family: $fontTitle;
-
-      &::before {
-        content: "";
-        width: 12px;
-        height: 12px;
-        position: absolute;
-        left: 0;
-        top: 7px;
-        background-color: $primary;
-        border-radius: 50%;
-      }
-    }
-  }
-
   p {
     margin-bottom: 16px;
     font-weight: 500;
@@ -894,19 +879,19 @@
     }
   }
 
-  &__box {
+  ul {
     margin-bottom: 32px;
 
-    p {
-      font-family: $fontTitle;
+    li {
+      font-family: $fontPrimary;
       font-size: 18px;
       line-height: 1.4em;
       margin-bottom: 2px;
+    }
 
-      span {
-        font-family: $fontPrimary;
-        font-weight: 500;
-      }
+    strong {
+      font-weight: 500;
+      font-family: $fontTitle;
     }
 
     a[href^="mailto:"] {
@@ -916,9 +901,29 @@
     a {
       color: $primary;
     }
+
   }
+}
 
+.list-marker {
+  li {
+    padding-left: 20px;
+    position: relative;
+    font-weight: 500;
+    line-height: 1.7em;
+    font-family: $fontTitle;
 
+    &::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      left: 0;
+      top: 8px;
+      background-color: $primary;
+      border-radius: 50%;
+    }
+  }
 }
 
 .privacy {
@@ -960,6 +965,7 @@
 
   p {
     margin-bottom: 6px;
+    font-weight: 500;
   }
 
   h5 {
@@ -974,17 +980,14 @@
   }
 }
 
-address {
-  font-style: normal;
+ul {
+  li {
+    margin-bottom: 4px;
+    font-weight: 500;
 
-  ul {
-    li {
-      margin-bottom: 4px;
-
-      a {
-        color: $primary;
-        text-decoration: underline;
-      }
+    a {
+      color: $primary;
+      text-decoration: underline;
     }
   }
 }

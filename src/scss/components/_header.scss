@@ -136,7 +136,8 @@
       font-weight: 600;
       font-size: 14px;
       position: relative;
-      pointer-events: none;
+      text-decoration: none;
+      // pointer-events: none;
       // transition: color $hover-duration $timing;
       @include d(992) {
         color: $black;

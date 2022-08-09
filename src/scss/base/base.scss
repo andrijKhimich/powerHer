@@ -40,6 +40,7 @@ body {
   @include d(992) {
     scroll-behavior: smooth;
   }
+
   /* width */
   &::-webkit-scrollbar {
     width: 0;
@@ -535,6 +536,7 @@ main {
   align-items: center;
   white-space: nowrap;
   transition: color $hover-duration $timing;
+  cursor: pointer;
 
   span {
     position: relative;
@@ -598,6 +600,7 @@ main {
   justify-content: center;
   white-space: nowrap;
   transition: color $hover-duration $timing, background-color $hover-duration $timing;
+  cursor: pointer;
 
   span {
     position: relative;
@@ -656,7 +659,8 @@ main {
 }
 
 
-.btn_sm {
+.btn_sm,
+.form__btn {
   position: relative;
   color: $primary;
   font-size: 14px;
@@ -668,6 +672,7 @@ main {
   align-items: center;
   white-space: nowrap;
   transition: color $hover-duration $timing;
+  cursor: pointer;
 
   span {
     position: relative;
@@ -738,6 +743,21 @@ main {
   @include d(768) {
     flex-wrap: wrap;
   }
+}
+
+.form__btn {
+  position: relative;
+  width: fit-content;
+}
+
+.custom-submit {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  left: 0;
+  height: 100%;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .form__box {
@@ -812,10 +832,14 @@ main {
   }
 
   &__gift {
-    padding-top: 220px;
+    padding: 220px 0 0 0;
+
+    @include d(1280) {
+      padding: 120px 0;
+    }
 
     @include d(992) {
-      padding-top: 80px;
+      padding: 80px 0;
     }
   }
 }
@@ -823,15 +847,57 @@ main {
 
 .js-show {
   opacity: 0;
-  transform: translate(0, 50px);
   transition: transform $duration $timing, opacity $duration $timing;
 
   &.show {
     opacity: 1;
-    transform: translate(0, 0);
   }
 }
 
-.gift__wrapper {
-  position: relative;
+
+.wpcf7-spinner {
+  position: absolute;
+  margin: 0;
+  left: 120%;
+  bottom: 0;
+}
+
+.wpcf7-not-valid-tip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: $error;
+  margin: 0;
+  line-height: 1em;
+  font-size: 12px;
+  // opacity: 0;
+}
+
+.wpcf7-form-control-wrap {
+  padding-bottom: 35px;
+}
+
+.wpcf7 form .wpcf7-response-output {
+  position: absolute;
+  border: none;
+  margin: 0;
+  font-size: 12px;
+  padding: 5px 0;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output {
+  color: $primary;
+}
+
+.wpcf7 form.sent .wpcf7-response-output {
+  color: $success;
+}
+
+.wpcf7-spinner {
+  left: 155%;
+  background-color: $white;
+
+  &::before {
+    background-color: $primary;
+  }
 }

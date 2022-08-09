@@ -1,5 +1,41 @@
 "use strict";
 
+document.addEventListener('DOMContentLoaded', function () {
+  
+  const sections = document.querySelectorAll(".js-spy");
+  const menu_links = document.querySelectorAll(".nav-list a");
+
+  // functions to add and remove the active class from links as appropriate
+  const makeActive = (link) => menu_links[link].classList.add("active");
+  const removeActive = (link) => menu_links[link].classList.remove("active");
+  const removeAllActive = () => [...Array(sections.length).keys()].forEach((link) => removeActive(link));
+  // const sectionMargin = 200;
+
+  let currentActive = 0;
+  window.addEventListener("scroll", () => {
+
+    const current = sections.length - [...sections].reverse().findIndex((section) => window.scrollY >= section.offsetTop - 300) - 1
+    if (current !== currentActive) {
+      removeAllActive();
+      currentActive = current;
+      makeActive(current);
+    }
+  });
+
+  function mobileMenu() {
+    $('.nav-list a[href^="#"]').click(function (event) {
+      event.preventDefault();
+      closeMenu();
+      $('html,body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+      }, 1000);
+    });
+  }
+  if (window.innerWidth < 992) {
+    mobileMenu();
+  }
+});
+
 // import { gsap } from "gsap/dist/gsap";
 // import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 // import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
@@ -20,454 +56,9 @@ const showAnimation = () => {
 window.addEventListener("scroll", showAnimation);
 showAnimation();
 
-
 gsap.registerPlugin(CSSRulePlugin, ScrollTrigger, ScrollToPlugin);
 
 
-gsap.from('body', { duration: 2, opacity: 0, delay: 1 });
-gsap.fromTo('.preloader', { opacity: 1 }, { opacity: 0, duration: 1, display: 'none', delay: 2 });
-gsap.from('.preloader__icon', { duration: 1, x: '100%', delay: 1 });
-gsap.from('.preloader__word', { duration: 1, x: '-50%', opacity: 0, delay: 1 });
-// gsap.from('.logo', { duration: 1, y: '-100%', duration: 1, delay: 3 });
-gsap.from('.header-row', { duration: 1, y: '-200%', delay: 3 });
-
-gsap.from('.hero__content', { duration: 1, x: '-20px', opacity: 0, delay: 3 });
-gsap.from('.hero-cta__content', { duration: 1, x: '-20px', opacity: 0, delay: 3 });
-gsap.from('.hero__img img', { duration: 1, x: '-20px', scale: 1.2, opacity: 0, delay: 3 });
-gsap.from('.hero-cta__img img', { duration: 1, x: '-20px', scale: 1.2, opacity: 0, delay: 3 });
-
-gsap.from(CSSRulePlugin.getRule(".hero:before"), { duration: 1, x: '20px', opacity: 0, delay: 3 });
-
-// document.querySelectorAll(".nav-list__link").forEach((btn, index) => {
-
-//   btn.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     if (btn.classList.contains('link_active')) {
-//       btn.classList.remove('link_active');
-//     } else {
-//       e.target.classList.add('link_active');
-//     }
-//     gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1) } });
-//   });
-// });
-
-
-
-// Scroll to top Button
-// const scrollTopBtns = document.querySelectorAll('.nav-list a');
-
-// scrollTopBtns.forEach((btn) => {
-//   btn.addEventListener("click", () => {
-//     gsap.to(window, {duration: 1, scrollTo:{y:"#section" + (index + 1), offsetY:70}});
-//   });
-// })
-
-function goToSection(i, anim) {
-  gsap.set("body", { overflow: "hidden" });
-
-  gsap.to("body", {
-    scrollTo: { y: i * innerHeight, autoKill: false },
-    duration: 1,
-    overwrite: true,
-    onComplete: () => gsap.set("body", { overflow: "auto" })
-  });
-}
-
-
-// const site = document.querySelector('body');
-
-// const disableScroll = () => {
-//   site.style.overflow = 'hidden';
-//   setTimeout(function () {
-//     site.style.overflow = 'auto';
-//   }, 1000)
-// }
-// const triggers = [];
-
-// const goToSection = (i, anim) => {
-//   if (triggers[i]) { // only if the trigger exists
-//     gsap.to(window, {
-//       scrollTo: { y: triggers[i].trigger, autoKill: false },
-//       overwrite: true,
-//       duration: 1
-//     });
-//     anim && anim.restart();
-//   }
-// }
-
-// gsap.utils.toArray('.panel').forEach((panel, i) => {
-//   const trigger = ScrollTrigger.create({
-//     trigger: panel,
-//     start: "top bottom-=1",
-//     end: "bottom top+=2",
-//     markers: true,
-//     onEnter: () => goToSection(i),
-//     onEnterBack: () => goToSection(i)
-//   });
-//   triggers.push(trigger);
-// });
-
-// left: 37, up: 38, right: 39, down: 40,
-// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-// var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
-
-// function preventDefault(e) {
-//   e.preventDefault();
-// }
-
-// function preventDefaultForScrollKeys(e) {
-//   if (keys[e.keyCode]) {
-//     preventDefault(e);
-//     return false;
-//   }
-// }
-
-// modern Chrome requires { passive: false } when adding event
-// var supportsPassive = false;
-// try {
-//   window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
-//     get: function () { supportsPassive = true; }
-//   }));
-// } catch (e) { }
-
-// var wheelOpt = supportsPassive ? { passive: false } : false;
-// var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
-
-// // call this to Disable
-// function disableScroll() {
-//   console.log('disabled');
-//   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-//   window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-//   window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
-//   window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-// }
-
-// // call this to Enable
-// function enableScroll() {
-//   console.log('enable');
-//   window.removeEventListener('DOMMouseScroll', preventDefault, false);
-//   window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
-//   window.removeEventListener('touchmove', preventDefault, wheelOpt);
-//   window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
-// }
-
-
-ScrollTrigger.matchMedia({
-  '(min-width: 993px)': function () {
-    
-    gsap.to('.nav-wrapper', { opacity: 0, pointerEvents: 'none' });
-
-
-    // const initScrollTrigger = () => {
-    gsap.utils.toArray(".section").forEach((panel, i) => {
-      ScrollTrigger.create({
-        trigger: panel,
-        markers: false,
-        start: 'bottom 50%',
-
-        onEnter: () => {
-          if (i === 2) {
-          console.log(i);
-
-            // disableScroll();
-            // gsap.to("body", { overflow: "hidden" })
-            // .to(".someSelector", 1, { rotate: 360, delay: 0.5 }
-            gsap.to('.js-img-1', { duration: 1, maxWidth: '99.5vw', height: '100vh', width: '99.5vw', top: '100%' });
-            // gsap.to(window, { duration: 1, scrollTo: "#section4" });
-            gsap.to(window, {
-              scrollTo: { y: "#section4", autoKill: false },
-              overwrite: true,
-              duration: 1
-            });
-            setTimeout(function () {
-              gsap.to(window, { duration: 1, scrollTo: "#section5" });
-            }, 1500);
-            // gsap.to("body", { overflow: "" });
-
-            // setTimeout(function () {
-            //   enableScroll();
-            // }, 2500);
-          }
-          if (i === 6) {
-            // disableScroll();
-            gsap.to('.js-img-2', { duration: 1, maxWidth: '44%', height: '100%', width: '44%', bottom: '0', delay: 1.5 });
-            // gsap.to(window, { duration: 1, scrollTo: "#section8" });
-            gsap.to(window, {
-              scrollTo: { y: "#section8", autoKill: false },
-              overwrite: true,
-              duration: 1
-            });
-            setTimeout(function () {
-              gsap.to(window, { duration: 1, scrollTo: "#section9" });
-            }, 1500);
-            // setTimeout(function () {
-            //   enableScroll();
-            // }, 2500);
-          }
-        }
-      });
-
-
-
-      ScrollTrigger.create({
-        trigger: panel,
-        start: "10% 50%",
-        end: "10% 50%",
-
-        markers: false,
-
-        onEnterBack: () => {
-          console.log(i);
-
-          if (i === 4) {
-            // disableScroll();
-            gsap.to('.js-img-1', { duration: 1, maxWidth: '44%', height: '100%', top: '0', delay: 1 });
-            gsap.to(window, {
-              scrollTo: { y: "#section4", autoKill: false },
-              overwrite: true,
-              duration: 1
-            });
-            setTimeout(function () {
-              gsap.to(window, {
-                scrollTo: { y: "#section3", autoKill: false },
-                overwrite: true,
-                duration: 1
-              });
-            }, 1000);
-            // setTimeout(function () {
-            //   enableScroll();
-            // }, 2500);
-          }
-
-          if (i === 8) {
-            // disableScroll();
-            gsap.to('.js-img-2', { duration: 1, maxWidth: '100%', height: '100vh', width: '100%', bottom: '100%' });
-            gsap.to(window, {
-              scrollTo: { y: "#section8", autoKill: false },
-              overwrite: true,
-              duration: 1
-            });
-            setTimeout(function () {
-              gsap.to(window, {
-                scrollTo: { y: "#section7", autoKill: false },
-                overwrite: true,
-                duration: 1
-              });
-            }, 1500);
-            // setTimeout(function () {
-            //   enableScroll();
-            // }, 2500);
-          }
-        }
-      });
-    });
-    // }
-    gsap.utils.toArray(".section").forEach((panel, i) => {
-      ScrollTrigger.create({
-        trigger: panel,
-        markers: false,
-        start: 'top center',
-        end: 'top center',
-
-        // onToggle: self => console.log("toggled. active?", self.isActive),
-        onEnter: () => {
-          // goToSection(i);
-          if (i >= 1 && i < 2) {
-            gsap.to('.nav-wrapper', { duration: .4, opacity: 1, pointerEvents: 'initial' });
-          } else if (i >= 4 && i <= 6) {
-            gsap.to('.nav-wrapper', { duration: .4, opacity: 1, pointerEvents: 'initial' });
-          } else {
-            gsap.to('.nav-wrapper', { duration: .4, opacity: 0, pointerEvents: 'none' });
-          }
-          if (i === 5) {
-            gsap.to('.nav-list a', { duration: .4, color: '#0D0A0B' });
-          } else {
-            gsap.to('.nav-list a', { duration: .4, color: '#E6E6E6' });
-          }
-        }
-      });
-
-
-
-      ScrollTrigger.create({
-        trigger: panel,
-        start: 'top center',
-        end: 'top center',
-
-        markers: false,
-
-        onEnterBack: () => {
-          // goToSection(i)
-          console.log(i);
-          // if (i === 1) {
-          //   gsap.to('.nav-wrapper', {duration: 0, opacity: 1, pointerEvents: 'initial'});
-          // }
-          if (i <= 7 && i >= 5 || i === 2) {
-            gsap.to('.nav-wrapper', { duration: .4, opacity: 1, pointerEvents: 'initial' });
-          } else if (i <= 4 && i >= 3) {
-            gsap.to('.nav-wrapper', { duration: .4, opacity: 0, pointerEvents: 'none' });
-          }
-          else {
-            gsap.to('.nav-wrapper', { duration: .4, opacity: 0, pointerEvents: 'none' });
-          }
-          if (i === 6) {
-            gsap.to('.nav-list a', { duration: .4, color: '#0D0A0B' });
-          } else {
-            gsap.to('.nav-list a', { duration: .4, color: '#E6E6E6' });
-          }
-        }
-      });
-    });
-  }
-})
-// if (window.innerWidth <= 992) {
-//   console.log('disable')
-//   ScrollTrigger.getAll().forEach(test => test.disable());
-// }
-// scrollTopBtns.addEventListener('click', function () {
-
-//   ScrollTrigger.getAll().forEach(test => test.disable());
-//     gsap.to(window, {
-//         duration: 1.5, 
-//         scrollTo: {
-//           y: 0,
-//           x: 0,
-//           autoKill: true
-//         },
-//       onComplete: enableGsap
-//     });
-// });
-
-// gsap.from('.hero::before', { duration: 1, x: '20px', scale: 1.4, opacity: 0, duration: 1, delay: 3 });
-
-// var rule = CSSRulePlugin.getRule(".hero:before"); //get the rule
-
-
-// const preloadTimeline = gsap.timeline({defaults: {duration: 1}});
-// preloadTimeline.from()
-
-
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// ScrollTrigger.config({ limitCallbacks: true });
-
-// // const snapText = document.querySelectorAll('.snap-section-text');
-// const sections = document.querySelectorAll('.section');
-
-// function goToSection(section) {
-//   gsap.to(window, {
-//     scrollTo: { y: section, autoKill: false },
-//     duration: .75
-//   });
-// }
-
-// // Text Scroller Snap Function for each panel
-
-// sections.forEach((section, i) => {
-//   ScrollTrigger.create({
-//     trigger: section,
-//     duration: 1,
-//     scrub: true,
-//     // start: 'bottom bottom',
-//     // end: 'bottom center',
-//     onEnter: () => {
-//       console.log(i);
-//       // goToSection(section);
-
-//       if (i === 2) {
-//         // goToSection(section);
-//         gsap.to('.js-img-1', { duration: 1, maxWidth: '99.5vw', height: '100vh', width: '99.5vw', top: '150%' });
-//         setTimeout(function () {
-//           gsap.to(window, { duration: 1, scrollTo: "#section2" });
-//         }, 1500);
-//       }
-//     },
-//     onEnterBack: () => {
-//       console.log(i);
-//       // console.log("onEnterBack()");
-//       // goToSection(section);
-//     },
-//     // markers: {startColor: "green", endColor: "red", fontSize: "12px"},
-//   });
-// });
-
-
-// Scroll to top Button
-// const scrollTopBtn = document.querySelector('.btn-top');
-
-// var enableGsap = function () {
-//   // test.enabled = true;
-//   // test.revert();
-//   // test.enable();
-//   ScrollTrigger.getAll().forEach(test => test.enable());
-//   // ScrollTrigger.getAll().forEach(test => test.enable());
-// }
-
-// scrollTopBtn.addEventListener('click', function () {
-
-//   ScrollTrigger.getAll().forEach(test => test.disable());
-//   gsap.to(window, {
-//     duration: 1.5,
-//     scrollTo: {
-//       y: 0,
-//       x: 0,
-//       autoKill: true
-//     },
-//     onComplete: enableGsap
-//   });
-// });
-
-
-// function goToSection(i, anim) {
-//   gsap.to(window, {
-//     scrollTo: { y: i * innerHeight, autoKill: false },
-//     duration: 1
-//   });
-
-//   if (anim) {
-//     anim.restart();
-//   }
-// }
-
-// const setGiftImgHeight = () => {
-//   const giftImg = document.querySelector('.js-img-1');
-//   giftImg.style.transform = "translate(0,-50%)";
-// }
-
-// setGiftImgHeight();
-
-
-const accordion = document.querySelector(".accordion");
-
-
-const accordionItems = document.querySelectorAll(".accordion__item");
-const accordionContent = document.querySelectorAll(".accordion__panel");
-const toggleAccordion = () => {
-  accordion.addEventListener("click", (e) => {
-    const parent = e.target.parentNode;
-    let panel = parent.querySelector(".accordion__panel");
-    if (parent.classList.contains("accordion__item")) {
-      if (parent.classList.contains("active")) {
-        parent.classList.remove("active");
-        panel.style.maxHeight = null;
-      } else {
-        accordionItems.forEach((item) => {
-          item.classList.remove("active");
-        });
-        accordionContent.forEach((item) => {
-          item.style.maxHeight = null;
-        })
-        parent.classList.add("active");
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
-    }
-
-  })
-}
-toggleAccordion();
 
 var burger = document.querySelector(".js-burger");
 var menu = document.querySelector(".js-header-nav");
@@ -511,15 +102,406 @@ const closeMenu = () => {
 }
 
 
-$(document).on('click', '.nav-list a[href^="#"]', function (event) {
-  event.preventDefault();
-  closeMenu();
-  $('html, body').animate({
-    scrollTop: $($.attr(this, 'href')).offset().top
 
-  }, 2000);
-});
+const preloader = () => {
 
+  gsap.from('body', { duration: 2, opacity: 0, delay: 1 });
+  gsap.fromTo('.preloader', { opacity: 1 }, { opacity: 0, duration: 1, display: 'none', delay: 2 });
+  gsap.from('.preloader__icon', { duration: 1, x: '100%', delay: 1 });
+  gsap.from('.preloader__word', { duration: 1, x: '-50%', opacity: 0, delay: 1 });
+  gsap.from('.header-row', { duration: 1, y: '-200%', delay: 3 });
+  gsap.from('.hero__content', { duration: 1, x: '-20px', opacity: 0, delay: 3 });
+  gsap.from('.hero-cta__content', { duration: 1, x: '-20px', opacity: 0, delay: 3 });
+  gsap.from('.hero__img img', { duration: 1, x: '-20px', scale: 1.2, opacity: 0, delay: 3 });
+  gsap.from('.hero-cta__img img', { duration: 1, x: '-20px', scale: 1.2, opacity: 0, delay: 3 });
+  gsap.from(CSSRulePlugin.getRule(".hero:before"), { duration: 1, x: '20px', opacity: 0, delay: 3 });
+}
+
+
+const preloaderInner = () => {
+  gsap.from('body', { duration: 2, opacity: 0, delay: 1 });
+}
+// document.querySelectorAll(".nav-list__link").forEach((btn, index) => {
+
+//   btn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     if (btn.classList.contains('link_active')) {
+//       btn.classList.remove('link_active');
+//     } else {
+//       e.target.classList.add('link_active');
+//     }
+//     gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1) } });
+//   });
+// });
+
+
+
+// Scroll to top Button
+// const scrollTopBtns = document.querySelectorAll('.nav-list a');
+
+// scrollTopBtns.forEach((btn) => {
+//   btn.addEventListener("click", () => {
+//     gsap.to(window, {duration: 1, scrollTo:{y:"#section" + (index + 1), offsetY:70}});
+//   });
+// })
+
+// function goToSection(i, anim) {
+//   gsap.set("body", { overflow: "hidden" });
+
+//   gsap.to("body", {
+//     scrollTo: { y: i * innerHeight, autoKill: false },
+//     duration: 1,
+//     overwrite: true,
+//     onComplete: () => gsap.set("body", { overflow: "auto" })
+//   });
+// }
+
+
+
+const innerPage = document.querySelector('.inner-page');
+if (innerPage) {
+  preloaderInner();
+  document.querySelector('.nav-wrapper').style.display = 'none';
+  burger.style.display = 'none';
+};
+
+const homePage = document.querySelector('.home-page');
+if (homePage) {
+  preloader();
+  var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+
+  function preventDefault(e) {
+    e.preventDefault();
+  }
+
+  function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+      preventDefault(e);
+      return false;
+    }
+  }
+  window.history.scrollRestoration = "manual";
+  // modern Chrome requires { passive: false } when adding event
+  var supportsPassive = false;
+  try {
+    window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+      get: function () { supportsPassive = true; }
+    }));
+  } catch (e) { }
+
+  var wheelOpt = supportsPassive ? { passive: false } : false;
+  var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+  // call this to Disable
+  function disableScroll() {
+    console.log('disabled');
+    window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+    window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+    window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+    window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+  }
+
+  // call this to Enable
+  function enableScroll() {
+    console.log('enable');
+    window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+    window.removeEventListener('touchmove', preventDefault, wheelOpt);
+    window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+  }
+
+  ScrollTrigger.matchMedia({
+    '(min-width: 993px)': function () {
+      var settingUp = true;
+      const instances = [];
+      var buttonClicked = false;
+
+      instances.push(
+        ScrollTrigger.create({
+          trigger: ".section__gift",
+          markers: false,
+          start: '100% 55%',
+          end: '100% 55%',
+          preventOverlaps: true,
+          fastScrollEnd: true,
+          onEnter: () => {
+            if (!buttonClicked && !settingUp) {
+              disableScroll();
+              console.log('enter GIFT');
+              gsap.to('.js-img-1', { onStart: disableScroll, duration: 1, maxWidth: '100vw', height: '100vh', width: '100vw', top: '100%' });
+              gsap.to(window, {
+                onStart: disableScroll,
+                scrollTo: { y: "#section4", autoKill: false },
+                overwrite: true,
+                duration: 1,
+              });
+              setTimeout(function () {
+                gsap.to(window, {
+                  scrollTo: { y: "#section5", autoKill: false },
+                  overwrite: true,
+                  duration: 1,
+                  onComplete: enableScroll,
+                });
+              }, 1500);
+            }
+          },
+
+          onEnterBack: () => {
+            console.log('enter BACK GIFT');
+          },
+        })
+      );
+      instances.push(
+        ScrollTrigger.create({
+          trigger: ".img-cover",
+          markers: false,
+          start: '100% 55%',
+          end: '100% 55%',
+          preventOverlaps: true,
+          fastScrollEnd: true,
+          onEnter: () => {
+            console.log('enter cover 1');
+            disableScroll();
+          },
+          onEnterBack: () => {
+            if (!buttonClicked && !settingUp) {
+              // goToSection(i)
+              disableScroll();
+              // console.log('leave');
+              gsap.to(window, {
+                onStart: disableScroll,
+                scrollTo: { y: "#section4", autoKill: false },
+                overwrite: true,
+                duration: 1,
+                // onComplete: enableScroll,
+              });
+              gsap.to('.js-img-1', { delay: 1.5, duration: 1, maxWidth: '44%', height: '100%', width: '44%', top: '0' });
+
+              setTimeout(function () {
+                gsap.to(window, {
+                  scrollTo: { y: "#section3", autoKill: false },
+                  overwrite: true,
+                  duration: 1,
+                  onComplete: enableScroll,
+                });
+              }, 1500);
+            }
+            console.log('enter BACK COVER 1');
+          },
+        })
+      );
+      instances.push(
+        ScrollTrigger.create({
+          trigger: ".cta__img",
+          start: '40% 50%',
+          end: '40% 50%',
+          markers: false,
+          preventOverlaps: true,
+          fastScrollEnd: true,
+          onEnter: () => {
+            if (!buttonClicked && !settingUp) {
+              // goToSection(i)
+              console.log('enter cta');
+              disableScroll();
+              gsap.to(window, {
+                onStart: disableScroll,
+                scrollTo: { y: "#section8", autoKill: false },
+                overwrite: true,
+                duration: 1,
+              });
+              gsap.to('.js-img-2', { duration: 1, maxWidth: '44%', height: '100%', width: '44%', bottom: '0', delay: 1.5 });
+              setTimeout(function () {
+                gsap.to(window, {
+                  scrollTo: { y: "#section9", autoKill: false },
+                  overwrite: true,
+                  duration: 1,
+                  onComplete: enableScroll,
+                });
+              }, 1500);
+            }
+            console.log('enter COVER 2');
+          },
+          onEnterBack: () => {
+            disableScroll();
+            console.log('leave');
+            if (!buttonClicked && !settingUp) {
+              console.log('enter BACK COVER 2');
+            }
+          },
+        })
+      );
+      instances.push(
+        ScrollTrigger.create({
+          trigger: ".js-section__cta",
+          start: '0 50%',
+          end: '0 50%',
+          markers: false,
+          preventOverlaps: true,
+          fastScrollEnd: true,
+          onEnter: () => {
+            disableScroll();
+            if (!buttonClicked && !settingUp) {
+              // goToSection(i)
+              console.log('enter CTA');
+            }
+          },
+          onEnterBack: () => {
+
+            if (!buttonClicked && !settingUp) {
+              // goToSection(i)
+              console.log('leave cta')
+              disableScroll();
+              gsap.to(window, {
+                onStart: disableScroll,
+                scrollTo: { y: "#section8", autoKill: false },
+                overwrite: true,
+                duration: 1,
+              });
+              gsap.to('.js-img-2', { duration: 1, maxWidth: '100%', height: '100vh', width: '100vw', bottom: '100%' });
+              setTimeout(function () {
+                gsap.to(window, {
+                  scrollTo: { y: "#section7", autoKill: false },
+                  overwrite: true,
+                  duration: 1,
+                  onComplete: enableScroll,
+                });
+              }, 1500);
+            }
+            console.log('enter BACK CTA');
+          }
+        })
+      );
+      document.querySelectorAll(".nav-list a").forEach((btn, index) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          triggers.forEach(ins => ins.disable());
+          console.log(triggers);
+          buttonClicked = true;
+          console.log(buttonClicked, settingUp);
+          gsap.to('.nav-wrapper', { duration: 0, opacity: 1, pointerEvents: 'initial' });
+          if (index === 0) {
+            if (buttonClicked) {
+              gsap.to('.js-img-1', { duration: 1, maxWidth: '44%', height: '100%', width: '44%', top: '0' });
+              gsap.to(window, {
+                duration: 1, scrollTo: {
+                  y: "#section2", autoKill: false,
+                }
+              });
+            }
+            console.log(buttonClicked, settingUp);
+          }
+          if (index === 1) {
+            if (buttonClicked) {
+              gsap.to('.js-img-1', { duration: 1, maxWidth: '100vw', height: '100vh', width: '100vw', top: '100%' });
+              gsap.to(window, {
+                duration: 1, scrollTo: { y: "#section5", autoKill: false },
+              });
+            }
+          }
+          if (index === 2) {
+            if (buttonClicked) {
+              console.log('3');
+              gsap.to('.js-img-1', { duration: 1, maxWidth: '100vw', height: '100vh', width: '100vw', top: '100%' });
+              gsap.to(window, {
+                duration: 1, scrollTo: { y: "#section6", autoKill: false },
+              });
+            }
+          }
+          if (index === 3) {
+            if (buttonClicked) {
+              gsap.to('.js-img-1', { duration: 1, maxWidth: '100vw', height: '100vh', width: '100vw', top: '100%' });
+              gsap.to(window, {
+                duration: 1, scrollTo: { y: "#section7", autoKill: false },
+              });
+              console.log('4');
+            }
+          }
+          setTimeout(function () {
+            triggers.forEach(ins => ins.enable());
+            buttonClicked = false;
+            enableScroll();
+            console.log(buttonClicked, settingUp);
+          }, 1000);
+        });
+      });
+      gsap.utils.toArray(".section").forEach((panel, i) => {
+        ScrollTrigger.create({
+          trigger: panel,
+          markers: false,
+          start: 'top center',
+          end: 'top center',
+          preventOverlaps: true,
+          fastScrollEnd: true,
+          onEnter: () => {
+            if (i >= 1 && i < 2) {
+              gsap.to('.nav-wrapper', { duration: .1, opacity: 1, pointerEvents: 'initial' });
+            } else if (i >= 4 && i <= 6) {
+              gsap.to('.nav-wrapper', { duration: .1, opacity: 1, pointerEvents: 'initial' });
+            } else {
+              gsap.to('.nav-wrapper', { duration: .1, opacity: 0, pointerEvents: 'none' });
+            }
+            if (i === 5) {
+              gsap.to('.nav-list a', { duration: .1, color: '#0D0A0B' });
+            } else {
+              gsap.to('.nav-list a', { duration: .1, color: '#E6E6E6' });
+            }
+          },
+          onEnterBack: () => {
+            console.log(i);
+            if (i <= 7 && i >= 5 || i === 2) {
+              gsap.to('.nav-wrapper', { duration: .1, opacity: 1, pointerEvents: 'initial' });
+            } else if (i <= 4 && i >= 3) {
+              gsap.to('.nav-wrapper', { duration: .1, opacity: 0, pointerEvents: 'none' });
+            }
+            else {
+              gsap.to('.nav-wrapper', { duration: .1, opacity: 0, pointerEvents: 'none' });
+            }
+            if (i === 6) {
+              gsap.to('.nav-list a', { duration: .1, color: '#0D0A0B' });
+            } else {
+              gsap.to('.nav-list a', { duration: .1, color: '#E6E6E6' });
+            }
+          }
+        });
+
+      });
+      let triggers = ScrollTrigger.getAll();
+      settingUp = false;
+      triggers.forEach(trigger => {
+        trigger.clearScrollMemory
+      })
+    }
+  });
+}
+
+const accordion = document.querySelector(".accordion");
+const accordionItems = document.querySelectorAll(".accordion__item");
+const accordionContent = document.querySelectorAll(".accordion__panel");
+if (accordion) {
+  const toggleAccordion = () => {
+    accordion.addEventListener("click", (e) => {
+      const parent = e.target.parentNode;
+      let panel = parent.querySelector(".accordion__panel");
+      if (parent.classList.contains("accordion__item")) {
+        if (parent.classList.contains("active")) {
+          parent.classList.remove("active");
+          panel.style.maxHeight = null;
+        } else {
+          accordionItems.forEach((item) => {
+            item.classList.remove("active");
+          });
+          accordionContent.forEach((item) => {
+            item.style.maxHeight = null;
+          })
+          parent.classList.add("active");
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      }
+
+    })
+  }
+  toggleAccordion();
+}
 
 var testWebP = function testWebP(callback) {
   var webP = new Image();
@@ -527,7 +509,6 @@ var testWebP = function testWebP(callback) {
   webP.onload = webP.onerror = function () {
     callback(webP.height === 2);
   };
-
   webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
 };
 
@@ -541,29 +522,4 @@ testWebP(function (support) {
 
 svg4everybody();
 
-document.addEventListener('DOMContentLoaded', function () {
 
-  const sections = document.querySelectorAll(".js-spy");
-  const menu_links = document.querySelectorAll(".nav-list a");
-
-  // functions to add and remove the active class from links as appropriate
-  const makeActive = (link) => menu_links[link].classList.add("active");
-  const removeActive = (link) => menu_links[link].classList.remove("active");
-  const removeAllActive = () => [...Array(sections.length).keys()].forEach((link) => removeActive(link));
-
-  // const sectionMargin = 200;
-
-  let currentActive = 0;
-
-  // listen for scroll events
-  window.addEventListener("scroll", () => {
-
-    const current = sections.length - [...sections].reverse().findIndex((section) => window.scrollY >= section.offsetTop - 300) - 1
-    if (current !== currentActive) {
-      removeAllActive();
-      currentActive = current;
-      makeActive(current);
-    }
-  });
-
-}, false);

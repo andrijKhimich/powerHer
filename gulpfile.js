@@ -102,6 +102,7 @@ const js = () => {
     "node_modules/gsap/dist/CSSRulePlugin.min.js",
     "node_modules/gsap/dist/ScrollTrigger.min.js",
     "node_modules/gsap/dist/ScrollToPlugin.min.js",
+    // "node_modules/gsap/dist/ScrollSmoother.min.js",
 
 
 
