@@ -179,7 +179,6 @@
       max-width: 100%;
       padding: 0 24px;
     }
-
   }
 }
 
@@ -189,10 +188,6 @@
   @include d(1280) {
     padding: 100px 0;
   }
-
-  // @include d(1024) {
-  //   padding: 0 0 100px 0;
-  // }
 
   &__title {
     display: none;
@@ -302,7 +297,6 @@
       h6 {
         color: $primary;
       }
-
     }
   }
 }
@@ -358,7 +352,7 @@
       max-width: 100%;
     }
 
-    &>p {
+    & > p {
       margin-bottom: 17px;
     }
   }
@@ -456,7 +450,6 @@
         transform: rotate(90deg);
       }
     }
-
   }
 }
 
@@ -494,14 +487,13 @@
   }
 }
 
-
 .accordion__panel {
   max-height: 0;
   overflow: hidden;
   transition: max-height $hover-duration $timing;
   position: relative;
 
-  &>*:last-child {
+  & > *:last-child {
     margin-bottom: 40px;
   }
 
@@ -517,6 +509,10 @@
     text-decoration: underline;
     color: $primary;
     font-weight: 700;
+  }
+
+  .btn {
+    text-decoration: none;
   }
 
   ul {
@@ -607,7 +603,6 @@
       flex: 0 0 50%;
     }
 
-
     &:nth-child(1) {
       background-color: $white;
     }
@@ -623,7 +618,6 @@
     &:nth-child(4) {
       @include d(768) {
         background-color: $white;
-
       }
     }
 
@@ -638,7 +632,6 @@
     &:nth-child(5) {
       @include d(768) {
         background-color: $white;
-
       }
     }
 
@@ -659,7 +652,6 @@
 }
 
 .about {
-
   padding: 120px 0;
 
   @include d(1024) {
@@ -674,7 +666,6 @@
   &__content {
     max-width: 64%;
     margin-left: auto;
-
 
     @include d(992) {
       max-width: 100%;
@@ -901,7 +892,6 @@
     a {
       color: $primary;
     }
-
   }
 }
 
@@ -992,12 +982,16 @@ ul {
   }
 }
 
-
-
 .img-cover {
   height: 100vh;
 
   @include d(992) {
     display: none;
   }
+}
+
+.convert-kit {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
 }

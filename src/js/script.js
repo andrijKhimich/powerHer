@@ -36,10 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// import { gsap } from "gsap/dist/gsap";
-// import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-// import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
-// import { TextPlugin } from "gsap/dist/TextPlugin";
 const animItems = document.querySelectorAll(".js-show");
 const showAnimation = () => {
   const trigger = (window.innerHeight / 5) * 4;
@@ -121,42 +117,6 @@ const preloader = () => {
 const preloaderInner = () => {
   gsap.from('body', { duration: 2, opacity: 0, delay: 1 });
 }
-// document.querySelectorAll(".nav-list__link").forEach((btn, index) => {
-
-//   btn.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     if (btn.classList.contains('link_active')) {
-//       btn.classList.remove('link_active');
-//     } else {
-//       e.target.classList.add('link_active');
-//     }
-//     gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1) } });
-//   });
-// });
-
-
-
-// Scroll to top Button
-// const scrollTopBtns = document.querySelectorAll('.nav-list a');
-
-// scrollTopBtns.forEach((btn) => {
-//   btn.addEventListener("click", () => {
-//     gsap.to(window, {duration: 1, scrollTo:{y:"#section" + (index + 1), offsetY:70}});
-//   });
-// })
-
-// function goToSection(i, anim) {
-//   gsap.set("body", { overflow: "hidden" });
-
-//   gsap.to("body", {
-//     scrollTo: { y: i * innerHeight, autoKill: false },
-//     duration: 1,
-//     overwrite: true,
-//     onComplete: () => gsap.set("body", { overflow: "auto" })
-//   });
-// }
-
-
 
 const innerPage = document.querySelector('.inner-page');
 if (innerPage) {
