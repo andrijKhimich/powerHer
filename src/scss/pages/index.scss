@@ -18,7 +18,7 @@
   }
 
   &::before {
-    content: "";
+    content: '';
     width: 41vw;
     height: 40vw;
     position: absolute;
@@ -85,7 +85,7 @@
       }
 
       &::before {
-        content: "";
+        content: '';
         width: 8px;
         height: 8px;
         background-color: $primary;
@@ -145,7 +145,7 @@
         }
 
         &::before {
-          content: "";
+          content: '';
           width: 209px;
           height: 1px;
           background-color: $beige;
@@ -236,7 +236,7 @@
       }
 
       &::before {
-        content: "";
+        content: '';
         width: 26px;
         height: 20px;
         background-image: url(../img/quote.svg);
@@ -525,7 +525,7 @@
       line-height: 1.7em;
 
       &::before {
-        content: "";
+        content: '';
         width: 12px;
         height: 12px;
         position: absolute;
@@ -672,11 +672,11 @@
     }
 
     p {
-      margin-bottom: 60px;
+      margin-bottom: 14px;
 
-      @include d(1440) {
-        margin-bottom: 40px;
-      }
+      // @include d(1440) {
+      //   margin-bottom: 20px;
+      // }
     }
   }
 
@@ -733,7 +733,7 @@
     }
 
     &::before {
-      content: "";
+      content: '';
       width: 45px;
       height: 33px;
       background-image: url(../img/quote.svg);
@@ -828,7 +828,7 @@
     }
 
     &::before {
-      content: "";
+      content: '';
       width: 300vw;
       height: 100%;
       position: absolute;
@@ -885,7 +885,7 @@
       font-family: $fontTitle;
     }
 
-    a[href^="mailto:"] {
+    a[href^='mailto:'] {
       color: $black;
     }
 
@@ -904,7 +904,7 @@
     font-family: $fontTitle;
 
     &::before {
-      content: "";
+      content: '';
       width: 12px;
       height: 12px;
       position: absolute;
