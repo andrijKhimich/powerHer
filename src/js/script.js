@@ -482,4 +482,114 @@ testWebP(function (support) {
 
 svg4everybody();
 
+const dropMenu = () => {
+  let blockSort = document.getElementById("sort");
+  if (!!blockSort) {
+    let blockList = document.getElementById("sort-list");
+    let elemItemSelect = document.querySelectorAll(".sort-select__item");
+    let elemCurrent = document.getElementById("current-value");
+    let active = document.querySelector("#sort-list li.active");
+
+    elemCurrent.textContent = active.textContent;
+
+    const hideSelectMenu = () => {
+      blockList.classList.remove('container-active');
+      blockSort.classList.remove('turn-arrow');
+      blockList.style.maxHeight = '0';
+    };
+
+    const showSelectMenu = () => {
+      blockList.classList.add('container-active');
+      blockList.style.maxHeight = blockList.scrollHeight + 'px';
+      blockSort.classList.add('turn-arrow');
+    };
+
+    const onMouseScroll = () => {
+      if (!blockList.classList.contains('container-active')) {
+        return
+      }
+      if (window.scrollY > 0) {
+        hideSelectMenu();
+      }
+    };
+
+    const onOutsideClick = (e) => {
+      if (!blockList.classList.contains('container-active')) {
+        return
+      }
+      if (!e.target.classList.contains('sort-select__item') && !e.target.classList.contains('sort-select__current')) {
+        hideSelectMenu();
+      }
+      ;
+    };
+
+    const onSelectClick = () => {
+      blockList.classList.contains('container-active')
+        ? hideSelectMenu()
+        : showSelectMenu();
+    };
+
+    blockSort.addEventListener('click', onSelectClick);
+    window.addEventListener('click', onOutsideClick);
+    window.addEventListener('scroll', onMouseScroll);
+
+    elemItemSelect.forEach(item => item.addEventListener('click', function () {
+      let elemItemSelectActive = document.querySelectorAll('.sort-select__item.active');
+      elemItemSelectActive.forEach(itemActive => itemActive.classList.remove('active'));
+      item.classList.add('active');
+      elemCurrent.textContent = item.textContent;
+      elemCurrent.setAttribute('data-value', item.getAttribute('data-value'));
+    }))
+  }
+};
+
+const setTitleTags = () => {
+  const titles = document.querySelectorAll('.editor-blog__content>h2');
+  const navbarContainer = document.querySelector('.navbar-blog>ul');
+  if (titles.length > 0) {
+    for (let i = 0; i < titles.length; i++) {
+      let id = `article${i + 1}`;
+      titles[i].setAttribute("id", id)
+      let titleOfElement = titles[i].innerHTML;
+      let newElement = document.createElement('li');
+      i === 0 && newElement.classList.add('active');
+      newElement.innerHTML = `<a href="#${id}">${titleOfElement}</a>`;
+      navbarContainer.append(newElement)
+    }
+  }
+}
+
+const scrollAnchors = () => {
+  const yOffset = -20;
+  const anchors = document.querySelectorAll('a[href*="#"]');
+  if (anchors.length > 0) {
+    for (let anchor of anchors) {
+      anchor.addEventListener('click', function (e) {
+        if (anchor.getAttribute('href').charAt(0) === '#') {
+          e.preventDefault()
+          const blockID = anchor.getAttribute('href').substring(1);
+          const obj = document.getElementById(blockID);
+          const y = obj.getBoundingClientRect().top + window.scrollY + yOffset;
+          window.scrollTo({top: y, behavior: 'smooth'});
+        }
+      })
+    }
+  }
+};
+
+const navbarActive = () => {
+  const anchors = document.querySelectorAll('.navbar-blog>ul>li');
+  anchors.forEach(anchor => {
+    anchor.onclick = () => {
+      document.querySelector('.navbar-blog>ul>.active').classList.remove('active');
+      anchor.classList.add('active');
+    }
+  })
+}
+
+setTitleTags()
+dropMenu()
+scrollAnchors()
+navbarActive()
+
 

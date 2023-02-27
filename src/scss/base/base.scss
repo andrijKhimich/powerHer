@@ -474,6 +474,9 @@ input {
 .main-wrapper {
   position: relative;
   overflow: hidden;
+  &.blog{
+    overflow: initial;
+  }
 }
 
 .container {
@@ -900,4 +903,234 @@ main {
   &::before {
     background-color: $primary;
   }
+}
+
+.blog-pagination {
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin: 0 0 0 336px;
+    border-top: 1px solid $color-grey-5;
+
+    &_numbers {
+      a {
+        font-size: 14px;
+        line-height: 20px;
+        border-radius: 8px;
+
+        &.active {
+          color: $error;
+          background-color: #FFF5F5;
+        }
+      }
+
+      a, span {
+        color: $color-grey-4;
+        padding: 10px 16px;
+      }
+    }
+  }
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
+}
+
+.spots {
+  display: inline-block;
+  text-align: center;
+  border-radius: 16px;
+  padding: 6px 12px 6px 4px;
+  background-color: #FFF5F5;
+  color: $error;
+  font-size: 14px;
+  line-height: 20px;
+
+  small {
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 700;
+    padding: 0 12px;
+    border-radius: 16px;
+    margin: 0 12px 0 0;
+  }
+}
+
+.navbar-blog {
+
+  > p {
+    strong {
+      font-size: 24px;
+      line-height: 32px;
+      font-family: "DMSerifText";
+      font-weight: 400;
+      color: #E30517;
+      text-transform: uppercase;
+    }
+  }
+
+  ul {
+    margin: 20px 0 0 0;
+    list-style: none;
+
+    li {
+      padding: 10px 14px;
+      font-size: 16px;
+      line-height: 31px;
+      cursor: pointer;
+      @media (min-width: 1200px) {
+        &:hover {
+          a {
+            color: $error;
+          }
+        }
+      }
+
+      a {
+        text-decoration: initial;
+        color: $color-grey-4;
+        transition: 500ms;
+      }
+
+      &.active {
+        border-radius: 6px;
+        background-color: $color-grey-2;
+        font-weight: 700;
+
+        a {
+          color: $black;
+        }
+      }
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid $black;
+  padding: 15px;
+  min-width: 170px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: bold;
+  border-radius: 20px;
+  vertical-align: top;
+
+  span {
+    position: relative;
+    mix-blend-mode: difference;
+  }
+
+  &:before {
+    content: "";
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    position: absolute;
+    transition: top 0.2s cubic-bezier(0.7, 0, 0.2, 1);
+    border-radius: 19px;
+  }
+
+  @media (min-width: 1200px) {
+    &:hover:before {
+      top: -110%;
+    }
+  }
+
+  &--primary {
+    background-color: $white;
+    color: $white;
+
+    &:before {
+      background-color: $black;
+    }
+  }
+
+  &--secondary {
+    background-color: $black;
+    color: $white;
+
+    &:before {
+      background-color: $white;
+    }
+
+    &._pagination {
+      border: 1px solid $color-grey-6;
+      color: $color-grey-6;
+      min-width: initial;
+      padding: 10px 20px;
+
+      span {
+        mix-blend-mode: initial;
+        padding: 0 0 0 23px;
+        position: relative;
+        transition: 500ms;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          background-image: url("../img/arrow.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+        }
+      }
+
+      &.next {
+        span {
+          padding: 0 23px 0 0;
+
+          &:before {
+            left: initial;
+            right: 0;
+            transform: rotateY(180deg) translateY(-50%);
+          }
+        }
+      }
+
+    }
+  }
+
+  &--grey {
+    background-color: $black;
+    color: $color-grey-3;
+
+    &:before {
+      background-color: $color-grey-3;
+    }
+  }
+
+  &[disabled],
+  &--disabled {
+    background-color: $color-grey-3;
+    color: $color-grey-1;
+    cursor: default;
+    border-color: $color-grey-3;
+
+    span {
+      mix-blend-mode: normal;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+.root{
+  padding: 115px 0 0 0;
 }
