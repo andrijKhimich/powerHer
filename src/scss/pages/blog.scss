@@ -234,12 +234,11 @@
     .pagination-mob {
       border-top: 1px solid $color-grey-5;
       display: none;
-      justify-content: space-between;
       margin: 48px 0 60px;
       padding: 12px 0 0 0;
       align-items: center;
 
-      span {
+      a {
         position: relative;
         width: 36px;
         height: 36px;
@@ -253,17 +252,11 @@
           height: 20px;
           left: 50%;
           top: 50%;
-          transform: translateY(-50%) translateX(-50%);
+          transform: translateY(-50%) translateX(-50%) rotate(180deg);
           background-image: url("../img/arrow-blog.svg");
           background-repeat: no-repeat;
           background-position: center;
           background-size: contain;
-        }
-
-        &:nth-of-type(1) {
-          &:before {
-            transform: translateY(-50%) translateX(-50%) rotate(180deg);
-          }
         }
       }
 
@@ -272,11 +265,98 @@
         line-height: 20px;
         color: #344054;
         font-weight: 400;
+        margin: 0 auto;
+      }
+
+      p + a{
+        &:before {
+          transform: translateY(-50%) translateX(-50%);
+        }
       }
     }
 
     .join {
       flex: 0 0 304px;
+      //plugin style
+      .wpcf7 {
+        position: sticky;
+        top: 50px;
+        background-color: $color-grey-2;
+        padding: 40px 32px;
+        max-height: 100%;
+        border-radius: 6px;
+
+        form {
+          > p {
+            > input {
+              cursor: pointer;
+              margin: 40px 0 0 0;
+              display: inline-block;
+              width: 100%;
+              background-color: $black;
+              border: 1px solid $black!important;
+              padding: 15px;
+              min-width: 170px;
+              text-align: center;
+              font-size: 14px;
+              line-height: 1.7;
+              font-weight: bold;
+              border-radius: 20px;
+              color: $white;
+            }
+
+            &:first-of-type {
+              text-align: center;
+              margin: 0 0 40px 0;
+            }
+          }
+
+          .input-container {
+            display: block;
+            margin: 0 0 16px 0;
+
+
+            &:last-of-type {
+              margin: 0;
+            }
+
+            input {
+              border-radius: 20px;
+              border: 1px solid $color-grey-1;
+              background: transparent;
+              padding: 19px;
+              display: block;
+              width: 100%;
+
+              &::placeholder {
+                color: $color-grey-4;
+                font-size: 14px;
+                line-height: 27px;
+              }
+
+              &:focus-visible {
+                outline: 1px solid $black;
+              }
+
+            }
+          }
+
+          .wpcf7-not-valid-tip{
+            color: $error!important;
+          }
+
+          .wpcf7-spinner{
+            display: block!important;
+            margin: 10px auto!important;
+          }
+
+          .wpcf7-response-output{
+            border-color: $error;
+          }
+        }
+      }
+
+      //plugin style
 
       &__content {
         position: sticky;
@@ -317,8 +397,8 @@
               outline: 1px solid $black;
 
               &:invalid {
-                outline: 1px solid $error !important;
-                color: $error !important;
+                outline: 1px solid $error!important;
+                color: $error!important;
 
                 &::placeholder {
                   color: rgba($error, 0.3) !important;
