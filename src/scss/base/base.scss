@@ -960,21 +960,11 @@ main {
   display: inline-block;
   text-align: center;
   border-radius: 16px;
-  padding: 6px 12px 6px 4px;
+  padding: 12px 18px;
   background-color: #FFF5F5;
   color: $error;
   font-size: 14px;
   line-height: 20px;
-
-  small {
-    background-color: #fff;
-    font-size: 14px;
-    line-height: 24px;
-    font-weight: 700;
-    padding: 0 12px;
-    border-radius: 16px;
-    margin: 0 12px 0 0;
-  }
 }
 
 .navbar-blog {
