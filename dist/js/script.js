@@ -760,12 +760,12 @@ var navbarActive = function navbarActive() {
     };
   });
 };
-var copyBtn = document.querySelector('.editor-blog__links>p>span');
+var copyBtn = document.querySelector('.btn-copy');
 var copyBlogLink = function copyBlogLink() {
   navigator.clipboard.writeText(window.location.href);
-  copyBtn.parentNode.classList.add('active');
+  copyBtn.classList.add('active');
   setTimeout(function () {
-    copyBtn.parentNode.classList.remove('active');
+    copyBtn.classList.remove('active');
   }, 1000);
 };
 copyBtn.addEventListener('click', copyBlogLink);
