@@ -975,6 +975,10 @@ main {
   background-color: #E30517;
 }
 
+.blog-pagination {
+  margin: 0 0 80px 0;
+}
+
 .blog-pagination__content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1089,6 +1093,7 @@ main {
   font-weight: bold;
   border-radius: 20px;
   vertical-align: top;
+  text-decoration: initial;
 }
 
 .button span {
@@ -1808,16 +1813,27 @@ main {
 }
 
 .blog-content__content .join .wpcf7 form .wpcf7-not-valid-tip {
+  all: initial;
   color: #FF5C5C !important;
+  font-size: 16px;
+  line-height: 1.9;
+  font-family: Montserrat, sans-serif;
 }
 
 .blog-content__content .join .wpcf7 form .wpcf7-spinner {
+  left: initial !important;
+  position: relative !important;
   display: block !important;
-  margin: 10px auto !important;
+  margin: 20px auto 0 !important;
 }
 
 .blog-content__content .join .wpcf7 form .wpcf7-response-output {
-  border-color: #FF5C5C;
+  position: static;
+  border: 2px solid #FF5C5C;
+  margin: 2em 0.5em 1em;
+  padding: 0.2em 1em;
+  font-size: 16px;
+  line-height: 18px;
 }
 
 .blog-content__content .join__content {
