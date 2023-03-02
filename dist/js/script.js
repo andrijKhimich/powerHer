@@ -761,14 +761,16 @@ var navbarActive = function navbarActive() {
   });
 };
 var copyBtn = document.querySelector('.btn-copy');
-var copyBlogLink = function copyBlogLink() {
-  navigator.clipboard.writeText(window.location.href);
-  copyBtn.classList.add('active');
-  setTimeout(function () {
-    copyBtn.classList.remove('active');
-  }, 1000);
-};
-copyBtn.addEventListener('click', copyBlogLink);
+if (copyBtn) {
+  var copyBlogLink = function copyBlogLink() {
+    navigator.clipboard.writeText(window.location.href);
+    copyBtn.classList.add('active');
+    setTimeout(function () {
+      copyBtn.classList.remove('active');
+    }, 1000);
+  };
+  copyBtn.addEventListener('click', copyBlogLink);
+}
 setTitleTags();
 dropMenu();
 scrollAnchors();

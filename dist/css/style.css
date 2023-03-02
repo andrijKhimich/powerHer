@@ -3092,6 +3092,10 @@ ul li a {
     margin: 32px 0 16px;
   }
 
+  .blog-content .blog-content__content .join {
+    margin: 0 0 80px 0;
+  }
+
   .blog-content .blog-content__content .join__content {
     position: static;
   }

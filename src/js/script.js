@@ -589,15 +589,17 @@ const navbarActive = () => {
 
 const copyBtn = document.querySelector('.btn-copy');
 
-const copyBlogLink = () => {
-  navigator.clipboard.writeText(window.location.href);
-  copyBtn.classList.add('active');
-  setTimeout(() => {
-    copyBtn.classList.remove('active');
-  }, 1000);
-}
+if (copyBtn) {
+  const copyBlogLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    copyBtn.classList.add('active');
+    setTimeout(() => {
+      copyBtn.classList.remove('active');
+    }, 1000);
+  }
 
-copyBtn.addEventListener('click', copyBlogLink);
+  copyBtn.addEventListener('click', copyBlogLink);
+}
 
 setTitleTags()
 dropMenu()
