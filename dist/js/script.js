@@ -753,12 +753,14 @@ var scrollAnchors = function scrollAnchors() {
 };
 var navbarActive = function navbarActive() {
   var anchors = document.querySelectorAll('.navbar-blog>ul>li');
-  anchors.forEach(function (anchor) {
-    anchor.onclick = function () {
-      document.querySelector('.navbar-blog>ul>.active').classList.remove('active');
-      anchor.classList.add('active');
-    };
-  });
+  if (anchors.length > 0) {
+    anchors.forEach(function (anchor) {
+      anchor.onclick = function () {
+        document.querySelector('.navbar-blog>ul>.active').classList.remove('active');
+        anchor.classList.add('active');
+      };
+    });
+  }
 };
 var copyBtn = document.querySelector('.btn-copy');
 if (copyBtn) {

@@ -579,12 +579,14 @@ const scrollAnchors = () => {
 
 const navbarActive = () => {
   const anchors = document.querySelectorAll('.navbar-blog>ul>li');
-  anchors.forEach(anchor => {
-    anchor.onclick = () => {
-      document.querySelector('.navbar-blog>ul>.active').classList.remove('active');
-      anchor.classList.add('active');
-    }
-  })
+  if (anchors.length > 0) {
+    anchors.forEach(anchor => {
+      anchor.onclick = () => {
+        document.querySelector('.navbar-blog>ul>.active').classList.remove('active');
+        anchor.classList.add('active');
+      }
+    })
+  }
 }
 
 const copyBtn = document.querySelector('.btn-copy');
